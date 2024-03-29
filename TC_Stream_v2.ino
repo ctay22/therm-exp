@@ -28,8 +28,8 @@ StaticJsonDocument<3000> doc;
 
 
 // WiFi network name and password:
-const char * networkName = "TaylorLab";
-const char * networkPswd = "asdfghjkl";
+const char * networkName = "SSID";
+const char * networkPswd = "PW";
 const int LED_PIN = 13;
 
 // MQTT SETUP
@@ -40,7 +40,7 @@ NTPClient timeClient(ntpUDP);
 
 const char broker[] = "test.mosquitto.org";
 int        port     = 1883;
-const char topic[]  = "test/tc";
+const char topic[]  = "YOUR_TOPIC/tc";
 char tc1String[24];
 int Tx_Blink = 0;
 
