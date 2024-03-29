@@ -38,12 +38,12 @@ Analytics NB: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.
 **BibTex Entry:** 
 ```
 @misc{Taylor2024, 
-  author = {Taylor,C.E.},\
-  title = {Therm-Exp:Tool chain for thermodynamics experiments.},\
-  year = {2024},\
-  publisher = {Zenodo},\
-  journal = {GitHub Repository},\
-  doi = {https://zenodo.org/records/10895543}\
+  author = {Taylor,C.E.},
+  title = {Therm-Exp:Tool chain for thermodynamics experiments.},
+  year = {2024},
+  publisher = {Zenodo},
+  journal = {GitHub Repository},
+  doi = {https://zenodo.org/records/10895543}
 }
 ```
 
