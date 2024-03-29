@@ -94,7 +94,7 @@ notebook==6.5.6
 notebook_shim==0.2.3
 numpy==1.26.4
 oauthlib==3.2.2
-packaging==3.2
+packaging==23.2
 pamela==1.1.0
 pandas==2.2.1
 pandocfilters==1.5.0
