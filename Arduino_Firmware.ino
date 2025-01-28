@@ -1,7 +1,7 @@
 /*
 AUTHOR: Charles Taylor
-DATE: 09JAN2024
-PURPOSE: Stream data from a qwiic Thermocouple amplifier via ESP32-S2 WROOM Thing Plus and MQTT
+DATE: 28JAN2025
+PURPOSE: Stream data from a qwiic Thermocouple amplifier via ESP32-S2 WROOM Thing Plus and MQTT. Updated topics and simplified data push.
 Hardware: Thing Plus - Thermocouple Amplifier - Omega TC
 
 Sources:  https://learn.sparkfun.com/tutorials/esp32-s2-thing-plus-hookup-guide/arduino-examples
@@ -28,8 +28,8 @@ StaticJsonDocument<3000> doc;
 
 
 // WiFi network name and password:
-const char * networkName = "SSID";
-const char * networkPswd = "PW";
+const char * networkName = "TaylorLab";
+const char * networkPswd = "asdfghjkl";
 const int LED_PIN = 13;
 
 // MQTT SETUP
@@ -40,7 +40,8 @@ NTPClient timeClient(ntpUDP);
 
 const char broker[] = "test.mosquitto.org";
 int        port     = 1883;
-const char topic[]  = "YOUR_TOPIC/tc";
+const char MQTT_Topic[]  = "thermal_exp/measurements";
+const char MQTT_Control[]  = "thermal_exp/controls";
 char tc1String[24];
 int Tx_Blink = 0;
 
@@ -81,13 +82,10 @@ void callback3() {
   doc["ambient"] = tempSensor.getAmbientTemp();
 
   //start_time = millis();
-  mqttClient.beginMessage("test/results");
+  mqttClient.beginMessage(MQTT_Topic);
   serializeJson(doc, mqttClient);
   mqttClient.endMessage();
 
-  mqttClient.beginMessage("test/result2");
-  serializeJsonPretty(doc, mqttClient);
-  mqttClient.endMessage();
   //Serial.println(millis()-start_time);
 }
 
@@ -103,7 +101,7 @@ static unsigned long timers[number_of_callbacks]
 {
   50,  //callback1   -- 1
   250,  //callback2   -- 2
-  500  //callback3   -- 3
+  2000  //callback3   -- 3
 };
 
 //----------SETUP AND LOOP STRUCTURES --------------
@@ -200,17 +198,17 @@ void connectToMQTT()
   mqttClient.onMessage(onMqttMessage);
 
   Serial.print("Subscribing to topic: ");
-  Serial.println(topic);
+  Serial.println(MQTT_Control);
   Serial.println();
 
   // subscribe to a topic
-  mqttClient.subscribe(topic);
+  mqttClient.subscribe(MQTT_Control);
 
   // topics can be unsubscribed using:
-  // mqttClient.unsubscribe(topic);
+  // mqttClient.unsubscribe(MQTT_Control);
 
   Serial.print("Waiting for messages on topic: ");
-  Serial.println(topic);
+  Serial.println(MQTT_Control);
   Serial.println();
 }
 
